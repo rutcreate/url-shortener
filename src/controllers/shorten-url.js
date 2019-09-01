@@ -1,17 +1,32 @@
-// create shorten url
-const create = (req, res) => {
-    // TODO
-    // find existing one
-    // if not found, create new one
+import nanoid from 'nanoid'
+import ShortenUrl from '../models/shorten-url'
 
-    // prepare data for return
-    const result = {
-        url: 'https://www.google.com/intl/en/policies/privacy/',
-        shortenUrl: 'https://shrt.com/h3Zk32p'
+// create shorten url
+const create = async (req, res) => {
+    // get url from request
+    const { url } = req.body
+
+    // find existing
+    let shortenUrl = await ShortenUrl.findOne({ url })
+
+    // if not found, create new one
+    if (!shortenUrl) {
+        // generate code
+        const code = nanoid(7)
+
+        // create new one
+        shortenUrl = new ShortenUrl({
+            url,
+            code
+        })
+        await shortenUrl.save()
     }
 
     // return result
-    res.json(result)
+    res.json({
+        url: shortenUrl.url,
+        shortenUrl: shortenUrl.code
+    })
 }
 
 export default {
