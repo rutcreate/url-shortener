@@ -2,7 +2,7 @@ import ShortenUrl from '../models/shorten-url'
 
 // render home page with shorten url form.
 const index = (req, res) => {
-    res.send('home')
+    res.render('index')
 }
 
 // redirect to original url

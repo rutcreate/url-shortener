@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import path from 'path'
 import 'dotenv/config'
 import routes from './routes'
 
@@ -9,6 +10,13 @@ const app = express()
 // register middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+// setup static path
+app.use(express.static(path.join(__dirname, 'public')))
+
+// setup template engine
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'twig')
 
 // register routes
 app.use('/', routes)
