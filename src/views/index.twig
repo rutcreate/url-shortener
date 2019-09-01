@@ -11,18 +11,21 @@
                 <form method="post" id="form">
                     <div class="form-group">
                         <label for="field-url">Enter URL:</label>
-                        <input type="text" class="form-control" name="url" id="field-url" v-model="url" />
+                        <input type="text" class="form-control" :class="{'is-invalid': errors }" name="url" id="field-url" v-model="url" />
+                        <template v-if="errors && errors.url">
+                            <div class="invalid-feedback" v-for="error in errors.url"><% error %></div>
+                        </template>
                     </div>
                     <button type="submit" class="btn btn-primary" @click.prevent="submitUrl" :disabled="submitting"><% submitButtonText %></button>
                 </form>
 
-                <div id="result" class="card mt-4" v-if="shortenUrl">
+                <div id="result" class="card mt-4" v-if="result">
                     <div class="card-header">
                         <h3>Result</h3>
                     </div>
                     <div class="card-body">
-                        <p><strong>URL</strong>: <a :href="url" target="_blank"><% url %></a></p>
-                        <p><strong>Shorten URL</strong>: <a :href="shortenUrl" target="_blank"><% shortenUrl %></a></p>
+                        <p><strong>URL</strong>: <a :href="result.url" target="_blank"><% result.url %></a></p>
+                        <p><strong>Shorten URL</strong>: <a :href="result.shortenUrl" target="_blank"><% result.shortenUrl %></a></p>
                     </div>
                 </div>
             </div>

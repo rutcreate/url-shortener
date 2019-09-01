@@ -1,8 +1,14 @@
 import nanoid from 'nanoid'
+import { validationResult } from 'express-validator'
 import ShortenUrl from '../models/shorten-url'
 
 // create shorten url
 const create = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+    }
+
     // get url from request
     const { url } = req.body
 

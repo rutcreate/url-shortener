@@ -10,7 +10,10 @@ const app = new Vue({
             url: '',
 
             // shorten url from resp
-            shortenUrl: '',
+            result: null,
+
+            // errors from resp
+            errors: null,
 
             // submitting status
             submitting: false
@@ -25,8 +28,11 @@ const app = new Vue({
 
     methods: {
         submitUrl () {
-            // reset shorten url
-            this.shortenUrl = ''
+            // clear result
+            this.result = null
+
+            // clear errors
+            this.errors = null
 
             // update submitting status
             this.submitting = true
@@ -37,8 +43,11 @@ const app = new Vue({
             // call api to create shorten url
             axios.post('/shorten-url', params)
                 .then(resp => {
-                    // get shorten url from resp
-                    this.shortenUrl = resp.data.shortenUrl
+                    // update shorten url from resp
+                    this.result = {
+                        url: this.url,
+                        shortenUrl: resp.data.shortenUrl
+                    }
 
                     // reset submitting status
                     this.submitting = false
@@ -47,9 +56,19 @@ const app = new Vue({
                     // reset submitting status
                     this.submitting = false
 
-                    // display error
-                    alert(err)
+                    // update errors
+                    this.formatErrors(err.response.data.errors)
                 })
+        },
+
+        formatErrors (errors) {
+            this.errors = {}
+            errors.forEach(error => {
+                if (this.errors[error.param] === undefined) {
+                    this.errors[error.param] = []
+                }
+                this.errors[error.param].push(error.msg)
+            })
         }
     }
 })
