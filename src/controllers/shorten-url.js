@@ -31,7 +31,7 @@ const create = async (req, res) => {
     // return result
     res.json({
         url: shortenUrl.url,
-        shortenUrl: shortenUrl.code
+        shortenUrl: `${process.env.BASE_URL}/${shortenUrl.code}`
     })
 }
 
