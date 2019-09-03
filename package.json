@@ -17,9 +17,11 @@
   "dependencies": {
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
     "express-validator": "^6.2.0",
     "mongoose": "^5.6.11",
     "nanoid": "^2.1.0",
+    "rate-limit-mongo": "^1.0.3",
     "twig": "^1.13.3"
   }
 }
