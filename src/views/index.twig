@@ -11,9 +11,16 @@
                 <form method="post" id="form">
                     <div class="form-group">
                         <label for="field-url">Enter URL:</label>
-                        <input type="text" class="form-control" :class="{'is-invalid': errors }" name="url" id="field-url" v-model="url" />
+                        <input type="text" class="form-control" :class="{'is-invalid': errors.url }" name="url" id="field-url" v-model="url" />
                         <template v-if="errors && errors.url">
                             <div class="invalid-feedback" v-for="error in errors.url"><% error %></div>
+                        </template>
+                    </div>
+                    <div class="form-group">
+                        <label for="field-code">Custom Alias (optional):</label>
+                        <input type="text" class="form-control" :class="{'is-invalid': errors.code }" name="code" id="field-code" v-model="code" />
+                        <template v-if="errors && errors.code">
+                            <div class="invalid-feedback" v-for="error in errors.code"><% error %></div>
                         </template>
                     </div>
                     <button type="submit" class="btn btn-primary" @click.prevent="submitUrl" :disabled="submitting"><% submitButtonText %></button>

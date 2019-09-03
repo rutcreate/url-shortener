@@ -9,11 +9,14 @@ const app = new Vue({
             // form url
             url: '',
 
+            // custom alias
+            code: '',
+
             // shorten url from resp
             result: null,
 
             // errors from resp
-            errors: null,
+            errors: {},
 
             // submitting status
             submitting: false
@@ -32,13 +35,13 @@ const app = new Vue({
             this.result = null
 
             // clear errors
-            this.errors = null
+            this.errors = {}
 
             // update submitting status
             this.submitting = true
 
             // prepare params
-            const params = { url: this.url }
+            const params = { url: this.url, code: this.code }
 
             // call api to create shorten url
             axios.post('/shorten-url', params)

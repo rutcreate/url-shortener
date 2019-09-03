@@ -1,5 +1,4 @@
 import express from 'express'
-import { check } from 'express-validator'
 import HomeController from './controllers/home'
 import ShortenUrlController from './controllers/shorten-url'
 
@@ -9,6 +8,6 @@ const router = express.Router()
 // register routes
 router.get('/', HomeController.index)
 router.get('/:code', ShortenUrlController.redirect)
-router.post('/shorten-url', [ check('url').isURL() ], ShortenUrlController.create)
+router.post('/shorten-url', ShortenUrlController.create)
 
 export default router

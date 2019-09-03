@@ -4,14 +4,17 @@ import mongoose from 'mongoose'
 const schema = mongoose.Schema({
     url: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
 
     code: {
         type: String,
         required: true,
         unique: true
+    },
+
+    custom: {
+        type: Boolean
     }
 })
 
