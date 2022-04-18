@@ -21,7 +21,7 @@
     "express-validator": "^6.2.0",
     "mongoose": "^5.7.5",
     "nanoid": "^2.1.0",
-    "rate-limit-mongo": "^1.0.3",
+    "rate-limit-mongo": "2.3.2",
     "twig": "^1.13.3"
   }
 }
