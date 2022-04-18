@@ -1,3 +1,5 @@
+console.log('start app')
+
 const app = new Vue({
     el: '#app',
 
